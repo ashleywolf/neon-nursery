@@ -647,7 +647,7 @@ function drawUI(time){
   if(gs===S.CH_INTRO){
     const ch=CHALLENGES[curRound];
     ctx.save();ctx.globalAlpha=Math.min(1,st/.3);
-    ctx.font="bold clamp(28px,5vw,48px) sans-serif";ctx.textAlign="center";ctx.fillStyle=ch.color;
+    ctx.font="bold 40px sans-serif";ctx.textAlign="center";ctx.fillStyle=ch.color;
     ctx.shadowColor=ch.color;ctx.shadowBlur=20;
     ctx.fillText(ch.text,canvas.width/2,canvas.height/2);
     ctx.font="22px sans-serif";ctx.fillStyle="#fff";ctx.shadowBlur=0;
@@ -717,7 +717,7 @@ function changeState(ns){
       if(roundWin){score++;earnedAcc.push(curRound);Aud.success();
         PP.spawn(pet.x,pet.y,"confetti",25);PP.spawn(pet.x,pet.y,"star",15);
       }else{Aud.fail();pet.fainted=true;
-        PP.spawn(pet.x,pet.y,"sad_sparkle",20);
+        PP.spawn(pet.x,pet.y,"tear",20);
       }
       break;
     case S.FINAL:
@@ -745,7 +745,7 @@ function updateState(dt,time){
         PP.spawn(canvas.width/2,canvas.height/2,"confetti",15);changeState(S.FREE_PLAY)}
       break;
     case S.FREE_PLAY:
-      updatePet(dt,time);
+      updatePet(dt,time);pet.emotion=curEmo.emotion;
       if(st>=FP_DUR)changeState(S.CH_INTRO);
       break;
     case S.CH_INTRO:
